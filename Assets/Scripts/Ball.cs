@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] float speed = 3.0f;
+    //[SerializeField] float speed = 3.0f;
 
     private Rigidbody2D body = null;
     bool collidedThisFrame = false;
@@ -13,12 +13,13 @@ public class Ball : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        body.velocity = new Vector2(-0.707f, -0.707f) * speed;
+        body.velocity = new Vector2(-0.707f, -0.707f) * BallManager.ballSpeed;
     }
 
     void FixedUpdate()
     {
         collidedThisFrame = false;
+        body.velocity = body.velocity.normalized * BallManager.ballSpeed;
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -47,6 +48,7 @@ public class Ball : MonoBehaviour
             body.velocity = new Vector2(-body.velocity.x, body.velocity.y);
 		}
         collidedThisFrame = true;
+
 
     }
 }
