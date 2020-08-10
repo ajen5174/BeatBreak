@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d5eb53e94c4194ab5fdc1c76a638cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: {x: -0.707, y: -0.707}
 --- !u!212 &467614918244516966
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -115,7 +116,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &5152067987477737496
 CircleCollider2D:

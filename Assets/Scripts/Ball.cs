@@ -7,13 +7,15 @@ public class Ball : MonoBehaviour
 {
     //[SerializeField] float speed = 3.0f;
 
+    [HideInInspector] public Vector2 direction = new Vector2(-0.707f, -0.707f);
+
     private Rigidbody2D body = null;
     bool collidedThisFrame = false;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        body.velocity = new Vector2(-0.707f, -0.707f) * BallManager.ballSpeed;
+        body.velocity = direction * BallManager.ballSpeed;
     }
 
     void FixedUpdate()

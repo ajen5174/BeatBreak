@@ -6,9 +6,12 @@ public class Block : MonoBehaviour
 {
     [HideInInspector] public static int blocksDestroyed = 0;
 
+    LevelLoader levelLoader = null;
+
     void Start()
     {
-        
+        levelLoader = GetComponentInParent<LevelLoader>();
+        levelLoader.blocksLeft += 1;
     }
 
     void Update()
@@ -22,6 +25,7 @@ public class Block : MonoBehaviour
 		{
             Destroy(gameObject, 0.01f);
             blocksDestroyed++;
+            levelLoader.blocksLeft -= 1;
 		}
 	}
 }

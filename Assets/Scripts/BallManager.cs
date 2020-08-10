@@ -15,6 +15,7 @@ public class BallManager : MonoBehaviour
     [SerializeField] int blocksDestroyedToSpeedUp = 5;
     [SerializeField] float speedUpAmount = 1;
     [SerializeField] float maxSpeed = 9.0f;
+    [SerializeField] GameObject playBallText = null;
 
     List<Ball> balls = new List<Ball>();
 
@@ -23,15 +24,35 @@ public class BallManager : MonoBehaviour
         
     }
 
+    Vector2 RandomDirection()
+    {
+        Vector2 direction = Vector2.up;
+
+        float angle = Random.Range(30, 60);
+
+        direction = Quaternion.Euler(0, 0, angle) * direction;
+
+        direction.x *= Random.Range(0, 100) > 50 ? -1.0f : 1.0f;
+        direction.y *= Random.Range(0, 100) > 50 ? -1.0f : 1.0f;
+
+
+        return direction.normalized;
+    }
+
     void Update()
     {
         if (balls.Count == 0)
         {
+            playBallText.SetActive(true);
+            Block.blocksDestroyed = 0;
             //reset
             if(Keyboard.current.spaceKey.wasPressedThisFrame)
 			{
-                GameObject ball = Instantiate(ballPrefab, transform);
-                balls.Add(ball.GetComponent<Ball>());
+                GameObject go = Instantiate(ballPrefab, transform);
+                Ball ball = go.GetComponent<Ball>();
+                ball.direction = RandomDirection();
+                balls.Add(ball);
+                playBallText.SetActive(false);
 			}
         }
 
