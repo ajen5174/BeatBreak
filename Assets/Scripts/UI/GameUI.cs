@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockManager : MonoBehaviour
+public class GameUI : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,4 +15,9 @@ public class BlockManager : MonoBehaviour
     {
         
     }
+
+    public void LevelSelect()
+	{
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelect");
+	}
 }

@@ -9,6 +9,7 @@ public class BallManager : MonoBehaviour
 
     public static int ballsActive = 0;
 
+    [SerializeField] int baseBallSpeed = 4;
 
     [SerializeField] GameObject ballPrefab = null;
 
@@ -21,7 +22,7 @@ public class BallManager : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     Vector2 RandomDirection()
@@ -45,6 +46,7 @@ public class BallManager : MonoBehaviour
         {
             playBallText.SetActive(true);
             Block.blocksDestroyed = 0;
+            ballSpeed = baseBallSpeed;
             //reset
             if(Keyboard.current.spaceKey.wasPressedThisFrame)
 			{

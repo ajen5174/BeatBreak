@@ -11,7 +11,10 @@ public class Block : MonoBehaviour
     void Start()
     {
         levelLoader = GetComponentInParent<LevelLoader>();
-        levelLoader.blocksLeft += 1;
+        if(levelLoader != null)
+		{
+            levelLoader.blocksLeft += 1;
+		}
     }
 
     void Update()
