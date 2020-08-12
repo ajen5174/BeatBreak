@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour
 {
@@ -18,6 +19,20 @@ public class GameUI : MonoBehaviour
 
     public void LevelSelect()
 	{
-        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("LevelSelect");
 	}
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    public void ToTitle()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
 }

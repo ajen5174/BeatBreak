@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelSelect : MonoBehaviour
@@ -13,6 +14,12 @@ public class LevelSelect : MonoBehaviour
     [SerializeField] Camera levelCamera = null;
 
     private RenderTexture originalTex = null;
+
+    public void ToTitle()
+    {
+        SceneManager.LoadScene("TitleScreen");
+
+    }
 
     void Start()
     {
