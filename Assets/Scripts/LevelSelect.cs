@@ -35,6 +35,7 @@ public class LevelSelect : MonoBehaviour
             levelCamera.Render();
             //Texture2D tex = renderTexture.;
             current.GetComponentInChildren<RawImage>().texture = renderTexture;
+            currentLevelBlocks.SetActive(false);
             Destroy(currentLevelBlocks);
         }
         levelCamera.targetTexture = originalTex;

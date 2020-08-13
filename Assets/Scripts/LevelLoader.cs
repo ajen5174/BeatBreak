@@ -17,7 +17,6 @@ public class LevelLoader : MonoBehaviour
     void Start()
     {
         levelIndex = PlayerPrefs.GetInt("levelToLoad");
-        Debug.Log(levelIndex);
         PlayerPrefs.SetInt("levelToLoad", 0);
         currentLevel = Instantiate(levels[levelIndex], transform);
     }
