@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
+using System;
 
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] GameObject[] levels = null;
     [SerializeField] int levelIndex = 0;
+    [SerializeField] TextMeshProUGUI levelUI = null;
+    [SerializeField] TextMeshProUGUI timeUI = null;
 
     private GameObject currentLevel = null;
 
@@ -14,16 +18,28 @@ public class LevelLoader : MonoBehaviour
 
     int frameCounter = 0;
 
+    [HideInInspector] public bool levelStarted = false;
+
+    float time = 0.0f;
+
     void Start()
     {
         levelIndex = PlayerPrefs.GetInt("levelToLoad");
         PlayerPrefs.SetInt("levelToLoad", 0);
         currentLevel = Instantiate(levels[levelIndex], transform);
+        time = 0.0f;
     }
 
     void Update()
     {
-        if(blocksLeft == 0)
+        timeUI.text = "Time: " + string.Format("{0}:{1}", Math.Floor(time / 60).ToString("00"), Math.Floor(time % 60).ToString("00"));
+        if(levelStarted)
+        {
+            time += Time.deltaTime;
+        }
+        
+        levelUI.text = "Level: " + levelIndex;
+        if (blocksLeft == 0)
         {
             if(frameCounter < 5)
 			{
@@ -31,6 +47,9 @@ public class LevelLoader : MonoBehaviour
                 return;
 			}
             Destroy(currentLevel);
+
+            time = 0.0f;
+            levelStarted = false;
             levelIndex++;
             if(levelIndex < levels.Length)
 			{

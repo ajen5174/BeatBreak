@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 2
   secondsToLast: 0.5
+  effectRenderer: {fileID: 5868966519703443832}
 --- !u!212 &6480087580965214431
 SpriteRenderer:
   m_ObjectHideFlags: 0

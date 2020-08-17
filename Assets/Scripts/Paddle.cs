@@ -6,6 +6,7 @@ public class Paddle : MonoBehaviour
 {
     [SerializeField] float cooldown = 2.0f;
     [SerializeField] float secondsToLast = 0.5f;
+    [SerializeField] SpriteRenderer effectRenderer = null;
 
     float cooldownTimer = 0.0f;
     float secondsActiveTimer = 0.0f;
@@ -15,7 +16,7 @@ public class Paddle : MonoBehaviour
     BoxCollider2D collider = null;
     SpriteRenderer renderer = null;
 
-    void Fade(bool fadeIn)
+    void TogglePaddle(bool fadeIn)
 	{
         Color tempColor = renderer.color;
         tempColor.a = fadeIn ? 1.0f : 0.0f;
@@ -23,7 +24,7 @@ public class Paddle : MonoBehaviour
 
         active = fadeIn;
         cooldownTimer = 0.0f;
-        collider.enabled = !fadeIn;
+        collider.enabled = fadeIn;
 
     }
 
@@ -31,13 +32,7 @@ public class Paddle : MonoBehaviour
     {
         if (cooldownTimer > cooldown)
         {
-            Color tempColor = renderer.color;
-            tempColor.a = 1.0f;
-            renderer.color = tempColor;
-
-            active = true;
-            cooldownTimer = 0.0f;
-            collider.enabled = true;
+            TogglePaddle(true);
         }
     }
 
@@ -46,13 +41,7 @@ public class Paddle : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         renderer = GetComponent<SpriteRenderer>();
 
-        Color tempColor = renderer.color;
-        tempColor.a = 0.0f;
-        renderer.color = tempColor;
-
-        active = false;
-        secondsActiveTimer = 0.0f;
-        collider.enabled = false;
+        TogglePaddle(false);
 
         cooldownTimer = cooldown;
     }
@@ -80,5 +69,10 @@ public class Paddle : MonoBehaviour
                 collider.enabled = false;
 			}
 		}
+        else
+        {
+            Vector2 scale = Vector2.zero + Vector2.one * (cooldownTimer / cooldown);
+            effectRenderer.transform.localScale = scale.x > 1 ? Vector2.one : scale;
+        }
     }
 }

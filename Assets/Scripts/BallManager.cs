@@ -18,6 +18,8 @@ public class BallManager : MonoBehaviour
     [SerializeField] float maxSpeed = 9.0f;
     [SerializeField] GameObject playBallText = null;
 
+    [SerializeField] LevelLoader levelLoader = null;
+
     List<Ball> balls = new List<Ball>();
 
     void Start()
@@ -55,6 +57,7 @@ public class BallManager : MonoBehaviour
                 ball.direction = RandomDirection();
                 balls.Add(ball);
                 playBallText.SetActive(false);
+                levelLoader.levelStarted = true;
 			}
         }
 
@@ -63,6 +66,15 @@ public class BallManager : MonoBehaviour
             Block.blocksDestroyed -= blocksDestroyedToSpeedUp;
             ballSpeed = Mathf.Min(ballSpeed + speedUpAmount, maxSpeed);
             Debug.Log("Speed up");
+        }
+
+        if(levelLoader.levelStarted == false)
+        {
+            foreach(Ball b in balls)
+            {
+                Destroy(b.gameObject);
+            }
+            balls.Clear();
         }
     }
 
