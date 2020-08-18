@@ -1,0 +1,90 @@
+{
+    "name": "actions",
+    "maps": [
+        {
+            "name": "Controls",
+            "id": "9bb2249e-0f98-442c-bbcc-0e2a0877d9fc",
+            "actions": [
+                {
+                    "name": "DAction",
+                    "type": "Button",
+                    "id": "3499da98-f339-44c1-8c98-9c067701ec74",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "FAction",
+                    "type": "Button",
+                    "id": "c2c44268-7a0a-498b-be1c-d8c81cff17a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "JAction",
+                    "type": "Button",
+                    "id": "5fbbb855-2a15-4ef0-9155-4b0e0510feef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "KAction",
+                    "type": "Button",
+                    "id": "787d43e7-cf40-4e41-b82e-70d12dc9d7fc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "095bc27b-d941-4016-946a-8a3bc974f8d0",
+                    "path": "<Keyboard>/#(D)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7fae6022-c3ac-4273-b1b8-92c60529eb53",
+                    "path": "<Keyboard>/#(F)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1a756b1-5311-47e4-9e9c-b4765ceab643",
+                    "path": "<Keyboard>/#(J)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0797c625-0769-465a-a7c3-35b759d630c2",
+                    "path": "<Keyboard>/#(K)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

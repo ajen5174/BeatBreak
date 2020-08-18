@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,17 +18,20 @@ public class BallManager : MonoBehaviour
     [SerializeField] float speedUpAmount = 1;
     [SerializeField] float maxSpeed = 9.0f;
     [SerializeField] GameObject playBallText = null;
+    [SerializeField] TextMeshProUGUI nextBallText = null;
 
     [SerializeField] LevelLoader levelLoader = null;
 
     List<Ball> balls = new List<Ball>();
+
+    float ballStartTime = 0.0f;
 
     void Start()
     {
 
     }
 
-    Vector2 RandomDirection()
+    Vector2 RandomDirection(bool canFaceDown)
     {
         Vector2 direction = Vector2.up;
 
@@ -36,14 +40,26 @@ public class BallManager : MonoBehaviour
         direction = Quaternion.Euler(0, 0, angle) * direction;
 
         direction.x *= Random.Range(0, 100) > 50 ? -1.0f : 1.0f;
-        direction.y *= Random.Range(0, 100) > 50 ? -1.0f : 1.0f;
+        direction.y *= (Random.Range(0, 100) > 50 && canFaceDown) ? -1.0f : 1.0f;
 
 
         return direction.normalized;
     }
 
+    void MakeBall(bool canFaceDown)
+    {
+        GameObject go = Instantiate(ballPrefab, transform);
+        Ball ball = go.GetComponent<Ball>();
+        ball.direction = RandomDirection(canFaceDown);
+        balls.Add(ball);
+    }
+
     void Update()
     {
+        float nextBallTime = Mathf.Max(0.0f, Mathf.Min(15.0f, 15.0f - (levelLoader.time - ballStartTime)));
+
+        nextBallText.text = "Next Ball: 00:" + string.Format("{0}", Mathf.Floor(nextBallTime).ToString("00"));
+
         if (balls.Count == 0)
         {
             playBallText.SetActive(true);
@@ -52,13 +68,19 @@ public class BallManager : MonoBehaviour
             //reset
             if(Keyboard.current.spaceKey.wasPressedThisFrame)
 			{
-                GameObject go = Instantiate(ballPrefab, transform);
-                Ball ball = go.GetComponent<Ball>();
-                ball.direction = RandomDirection();
-                balls.Add(ball);
+                MakeBall(true);
                 playBallText.SetActive(false);
                 levelLoader.levelStarted = true;
+                ballStartTime = levelLoader.time;
 			}
+        }
+        else
+        {
+            if (levelLoader.time - ballStartTime > 15)
+            {
+                MakeBall(false);
+                ballStartTime = levelLoader.time;
+            }
         }
 
         if (Block.blocksDestroyed >= blocksDestroyedToSpeedUp)
@@ -76,6 +98,7 @@ public class BallManager : MonoBehaviour
             }
             balls.Clear();
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision) //the ball manager's collider is below the paddles

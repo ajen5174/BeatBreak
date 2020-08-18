@@ -20,7 +20,7 @@ public class LevelLoader : MonoBehaviour
 
     [HideInInspector] public bool levelStarted = false;
 
-    float time = 0.0f;
+    [HideInInspector] public float time = 0.0f;
 
     void Start()
     {
@@ -32,7 +32,7 @@ public class LevelLoader : MonoBehaviour
 
     void Update()
     {
-        timeUI.text = "Time: " + string.Format("{0}:{1}", Math.Floor(time / 60).ToString("00"), Math.Floor(time % 60).ToString("00"));
+        timeUI.text = "Time: " + string.Format("{0}:{1}", Mathf.Floor(time / 60).ToString("00"), Mathf.Floor(time % 60).ToString("00"));
         if(levelStarted)
         {
             time += Time.deltaTime;

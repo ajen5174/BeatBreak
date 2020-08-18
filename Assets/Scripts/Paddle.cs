@@ -43,7 +43,7 @@ public class Paddle : MonoBehaviour
 
         TogglePaddle(false);
 
-        cooldownTimer = cooldown;
+        cooldownTimer = cooldown + 1.0f;
     }
 
     void Update()
