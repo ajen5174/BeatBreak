@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210154ec6459c394480a0b2aeafb0e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 2
-  secondsToLast: 0.5
+  cooldown: 0.5
+  secondsToLast: 0.25
   effectRenderer: {fileID: 5868966519703443832}
 --- !u!212 &6480087580965214431
 SpriteRenderer:

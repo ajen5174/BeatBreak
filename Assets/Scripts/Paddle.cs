@@ -48,7 +48,6 @@ public class Paddle : MonoBehaviour
 
     void Update()
     {
-        cooldownTimer += Time.deltaTime;
 
         if(active)
 		{
@@ -71,6 +70,7 @@ public class Paddle : MonoBehaviour
 		}
         else
         {
+            cooldownTimer += Time.deltaTime;
             Vector2 scale = Vector2.zero + Vector2.one * (cooldownTimer / cooldown);
             effectRenderer.transform.localScale = scale.x > 1 ? Vector2.one : scale;
         }

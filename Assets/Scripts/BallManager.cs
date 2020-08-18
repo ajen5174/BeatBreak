@@ -19,6 +19,7 @@ public class BallManager : MonoBehaviour
     [SerializeField] float maxSpeed = 9.0f;
     [SerializeField] GameObject playBallText = null;
     [SerializeField] TextMeshProUGUI nextBallText = null;
+    [SerializeField] TextMeshProUGUI activeBallText = null;
 
     [SerializeField] LevelLoader levelLoader = null;
 
@@ -54,11 +55,32 @@ public class BallManager : MonoBehaviour
         balls.Add(ball);
     }
 
+    void SetBallActiveText()
+    {
+        string text = "Active: ";
+
+        if(balls.Count < 4)
+        {
+            text += balls.Count;
+        }
+        else if(balls.Count < 6)
+        {
+            text += "A lot!";
+        }
+        else
+        {
+            text += "Woah!";
+        }
+
+        activeBallText.text = text;
+    }
+
     void Update()
     {
         float nextBallTime = Mathf.Max(0.0f, Mathf.Min(15.0f, 15.0f - (levelLoader.time - ballStartTime)));
 
         nextBallText.text = "Next Ball: 00:" + string.Format("{0}", Mathf.Floor(nextBallTime).ToString("00"));
+        SetBallActiveText();
 
         if (balls.Count == 0)
         {
