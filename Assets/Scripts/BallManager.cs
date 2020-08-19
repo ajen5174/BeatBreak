@@ -63,6 +63,7 @@ public class BallManager : MonoBehaviour
 
     void SetBallActiveText()
     {
+        ballsActive = balls.Count;
         string text = "Active: ";
 
         if(balls.Count < 4)

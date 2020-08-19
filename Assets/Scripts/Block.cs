@@ -14,6 +14,7 @@ public class Block : MonoBehaviour
     [SerializeField] SpriteRenderer powerUpRenderer = null;
     [SerializeField] ePowerUp powerUp = ePowerUp.NONE;
     [SerializeField] GameObject particles = null;
+    [SerializeField] int scoreValue = 100;
 
     [HideInInspector] public static int blocksDestroyed = 0;
 
@@ -48,17 +49,19 @@ public class Block : MonoBehaviour
             settings.startColor = c;
             TextMeshPro text = go.GetComponentInChildren<TextMeshPro>();
             text.color = c;
+            text.text = "" + scoreValue;
 
             if(powerUp == ePowerUp.EXTRA_BALL)
             {
                 levelLoader.ballManager.MakeBall(true, transform);
                 powerUp = ePowerUp.NONE;
             }
-
+            Destroy(this);
             Destroy(go, 1.0f);
             Destroy(gameObject, 0.01f);
             blocksDestroyed++;
             levelLoader.blocksLeft -= 1;
+            levelLoader.AddScore(scoreValue);
 		}
 	}
 }

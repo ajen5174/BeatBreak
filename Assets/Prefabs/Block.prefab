@@ -51,6 +51,7 @@ MonoBehaviour:
   powerUp: 0
   particles: {fileID: 7571140581834246293, guid: 9a4d9dc1abe813341b2e8bc0bf696f7e,
     type: 3}
+  scoreValue: 100
 --- !u!212 &4241842616177299244
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -116,9 +117,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.0625, y: 0.0625, z: 0.0625, w: 0.0625}
+    border: {x: 0.041666668, y: 0.041666668, z: 0.041666668, w: 0.041666668}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.1875, y: 0.1875}
+    oldSize: {x: 0.125, y: 0.125}
     newSize: {x: 1, y: 0.3}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
