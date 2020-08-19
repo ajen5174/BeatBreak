@@ -47,12 +47,17 @@ public class BallManager : MonoBehaviour
         return direction.normalized;
     }
 
-    void MakeBall(bool canFaceDown)
+    public void MakeBall(bool canFaceDown, Transform t)
     {
-        GameObject go = Instantiate(ballPrefab, transform);
+        GameObject go = Instantiate(ballPrefab, t.position, t.rotation);
+        go.transform.parent = transform;
         Ball ball = go.GetComponent<Ball>();
         ball.direction = RandomDirection(canFaceDown);
         balls.Add(ball);
+    }
+    public void MakeBall(bool canFaceDown)
+    {
+        MakeBall(canFaceDown, transform);
     }
 
     void SetBallActiveText()

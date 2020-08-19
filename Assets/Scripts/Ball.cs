@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
     [HideInInspector] public Vector2 direction = new Vector2(-0.707f, -0.707f);
 
     private Rigidbody2D body = null;
-
+    private bool collidedThisFrame = false;
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -19,12 +19,16 @@ public class Ball : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         body.velocity = body.velocity.normalized * BallManager.ballSpeed;
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-
+        if(collidedThisFrame)
+        {
+            return;
+        }
 
         Vector2 fromCollider = transform.position - collision.transform.position;
 
@@ -44,7 +48,15 @@ public class Ball : MonoBehaviour
             //left or right hit
             body.velocity = new Vector2(-body.velocity.x, body.velocity.y);
 		}
+        //if(collision.CompareTag("Block"))
+        {
+            collidedThisFrame = true;
+        }
 
+    }
 
+    private void LateUpdate()
+    {
+        collidedThisFrame = false;
     }
 }

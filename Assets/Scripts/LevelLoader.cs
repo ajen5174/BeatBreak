@@ -11,6 +11,7 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] int levelIndex = 0;
     [SerializeField] TextMeshProUGUI levelUI = null;
     [SerializeField] TextMeshProUGUI timeUI = null;
+    [SerializeField] public BallManager ballManager = null;
 
     private GameObject currentLevel = null;
 
