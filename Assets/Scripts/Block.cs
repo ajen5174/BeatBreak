@@ -10,6 +10,8 @@ public class Block : MonoBehaviour
         EXTRA_BALL
     }
 
+    [SerializeField] Sprite pinballSprite = null;
+    [SerializeField] SpriteRenderer powerUpRenderer = null;
     [SerializeField] ePowerUp powerUp = ePowerUp.NONE;
     [SerializeField] GameObject particles = null;
 
@@ -24,6 +26,10 @@ public class Block : MonoBehaviour
 		{
             levelLoader.blocksLeft += 1;
 		}
+        if(powerUp == ePowerUp.EXTRA_BALL)
+        {
+            powerUpRenderer.sprite = pinballSprite;
+        }
     }
 
     void Update()

@@ -20,6 +20,7 @@ public class BallManager : MonoBehaviour
     [SerializeField] GameObject playBallText = null;
     [SerializeField] TextMeshProUGUI nextBallText = null;
     [SerializeField] TextMeshProUGUI activeBallText = null;
+    [SerializeField] GameObject speedUpText = null;
 
     [SerializeField] LevelLoader levelLoader = null;
 
@@ -108,13 +109,18 @@ public class BallManager : MonoBehaviour
                 MakeBall(false);
                 ballStartTime = levelLoader.time;
             }
+
+
         }
 
         if (Block.blocksDestroyed >= blocksDestroyedToSpeedUp)
         {
             Block.blocksDestroyed -= blocksDestroyedToSpeedUp;
+            if(ballSpeed != maxSpeed)
+            {
+                Instantiate(speedUpText);
+            }
             ballSpeed = Mathf.Min(ballSpeed + speedUpAmount, maxSpeed);
-            Debug.Log("Speed up");
         }
 
         if(levelLoader.levelStarted == false)

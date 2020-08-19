@@ -19,7 +19,6 @@ public class Ball : MonoBehaviour
 
     void FixedUpdate()
     {
-        
         body.velocity = body.velocity.normalized * BallManager.ballSpeed;
     }
 
@@ -27,6 +26,7 @@ public class Ball : MonoBehaviour
 	{
         if(collidedThisFrame)
         {
+            Debug.Log("Double collided???");
             return;
         }
 
