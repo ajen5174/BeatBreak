@@ -2014,6 +2014,8 @@ MonoBehaviour:
   activeBallText: {fileID: 1111448549}
   speedUpText: {fileID: 6325553923673448639, guid: ffcefefe5ad060947979a006a060e79e,
     type: 3}
+  ballDestroyText: {fileID: 5683589398249659889, guid: c66f119cbc13b434da7c993c003a256b,
+    type: 3}
   levelLoader: {fileID: 416611011}
 --- !u!4 &1021587518
 Transform:
