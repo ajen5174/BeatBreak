@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pinballSprite: {fileID: 21300000, guid: cb575719a80d0ae468a53d7daa30e019, type: 3}
+  timesTwoSprite: {fileID: 21300000, guid: 3b6bedecd7edf2043b82cf65115d4b74, type: 3}
+  timesThreeSprite: {fileID: 21300000, guid: b42e53334fb21d740820130ccd8b9055, type: 3}
   powerUpRenderer: {fileID: 1318730869591566427}
   powerUp: 0
   particles: {fileID: 7571140581834246293, guid: 9a4d9dc1abe813341b2e8bc0bf696f7e,
@@ -197,7 +199,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

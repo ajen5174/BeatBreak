@@ -14,6 +14,11 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] public BallManager ballManager = null;
     [SerializeField] TextMeshProUGUI scoreText = null;
     [SerializeField] TextMeshProUGUI highScoreText = null;
+    [SerializeField] GameObject completeLevelTextPrefab = null;
+
+    [SerializeField] GameObject nextLevelButton = null;
+
+    GameObject endScreenText = null;
 
     private GameObject currentLevel = null;
 
@@ -21,15 +26,33 @@ public class LevelLoader : MonoBehaviour
 
     int frameCounter = 0;
 
+    [HideInInspector] public bool levelComplete = false;
+
     [HideInInspector] public bool levelStarted = false;
 
     [HideInInspector] public float time = 0.0f;
 
     [HideInInspector] public int score = 0;
+    
+    [HideInInspector] public int scoreMultiplier = 1;
 
     public void AddScore(int scoreToAdd)
     {
-        score += BallManager.ballsActive * scoreToAdd;
+        score += BallManager.ballsActive * scoreToAdd * scoreMultiplier;
+    }
+
+    public void LoadNextLevel()
+    {
+
+        Destroy(endScreenText);
+
+        time = 0.0f;
+        
+        score = 0;
+        scoreMultiplier = 1;
+        Destroy(currentLevel);
+        nextLevelButton.SetActive(false);
+
     }
 
     void Start()
@@ -38,6 +61,7 @@ public class LevelLoader : MonoBehaviour
         PlayerPrefs.SetInt("levelToLoad", 0);
         currentLevel = Instantiate(levels[levelIndex], transform);
         time = 0.0f;
+        scoreMultiplier = 1;
     }
 
     void Update()
@@ -51,35 +75,44 @@ public class LevelLoader : MonoBehaviour
         levelUI.text = "Level: " + (levelIndex + 1);
         highScoreText.text = "High Score: " + PlayerPrefs.GetInt(levelUI.text);
         
-        
+        if(levelComplete && endScreenText == null)
+        {
+            levelIndex++;
+            if (levelIndex < levels.Length)
+            {
+                currentLevel = Instantiate(levels[levelIndex], transform);
+
+            }
+            else
+            {
+                //here we have completed the last level, so we need to go back to the title screen or something.
+            }
+            Debug.Log("Level Complete");
+            levelComplete = false;
+        }
+
         if (blocksLeft == 0)
         {
-            if(frameCounter < 5)
-			{
+            if (frameCounter < 5)
+            {
                 frameCounter++;
                 return;
-			}
-            Destroy(currentLevel);
-
-            time = 0.0f;
-            if(PlayerPrefs.GetInt(levelUI.text) < score)
+            }
+            
+            if (PlayerPrefs.GetInt(levelUI.text) < score)
             {
                 PlayerPrefs.SetInt(levelUI.text, score);
             }
-            score = 0;
-            levelStarted = false;
-            levelIndex++;
-            if(levelIndex < levels.Length)
-			{
-                currentLevel = Instantiate(levels[levelIndex], transform);
 
-			}
-			else
-			{
-                //here we have completed the last level, so we need to go back to the title screen or something.
-			}
-            Debug.Log("Level Complete");
-            
+            levelComplete = true;
+            levelStarted = false;
+            nextLevelButton.SetActive(true);
+
+            if (endScreenText == null)
+            {
+                endScreenText = Instantiate(completeLevelTextPrefab);
+            }
+
         }
 
         frameCounter = 0;

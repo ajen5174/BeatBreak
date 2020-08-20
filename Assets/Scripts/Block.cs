@@ -7,10 +7,14 @@ public class Block : MonoBehaviour
 {
     enum ePowerUp{
         NONE,
-        EXTRA_BALL
+        EXTRA_BALL,
+        SCORE_MULTIPLIER_TWO,
+        SCORE_MULTIPLIER_THREE
     }
 
     [SerializeField] Sprite pinballSprite = null;
+    [SerializeField] Sprite timesTwoSprite = null;
+    [SerializeField] Sprite timesThreeSprite = null;
     [SerializeField] SpriteRenderer powerUpRenderer = null;
     [SerializeField] ePowerUp powerUp = ePowerUp.NONE;
     [SerializeField] GameObject particles = null;
@@ -31,6 +35,14 @@ public class Block : MonoBehaviour
         {
             powerUpRenderer.sprite = pinballSprite;
         }
+        else if(powerUp == ePowerUp.SCORE_MULTIPLIER_TWO)
+        {
+            powerUpRenderer.sprite = timesTwoSprite;
+        }
+        else if(powerUp == ePowerUp.SCORE_MULTIPLIER_THREE)
+        {
+            powerUpRenderer.sprite = timesThreeSprite;
+        }
     }
 
     void Update()
@@ -49,12 +61,20 @@ public class Block : MonoBehaviour
             settings.startColor = c;
             TextMeshPro text = go.GetComponentInChildren<TextMeshPro>();
             text.color = c;
-            text.text = "" + scoreValue;
+            text.text = "" + scoreValue * BallManager.ballsActive * levelLoader.scoreMultiplier;
 
             if(powerUp == ePowerUp.EXTRA_BALL)
             {
                 levelLoader.ballManager.MakeBall(true, transform);
                 powerUp = ePowerUp.NONE;
+            }
+            else if (powerUp == ePowerUp.SCORE_MULTIPLIER_TWO)
+            {
+                levelLoader.scoreMultiplier *= 2;
+            }
+            else if (powerUp == ePowerUp.SCORE_MULTIPLIER_THREE)
+            {
+                levelLoader.scoreMultiplier *= 3;
             }
             Destroy(this);
             Destroy(go, 1.0f);

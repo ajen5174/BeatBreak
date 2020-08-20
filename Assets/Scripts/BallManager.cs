@@ -11,6 +11,7 @@ public class BallManager : MonoBehaviour
     public static int ballsActive = 0;
 
     [SerializeField] int baseBallSpeed = 4;
+    [SerializeField] int pointsLostOnBallLost = 100;
 
     [SerializeField] GameObject ballPrefab = null;
 
@@ -21,6 +22,8 @@ public class BallManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI nextBallText = null;
     [SerializeField] TextMeshProUGUI activeBallText = null;
     [SerializeField] GameObject speedUpText = null;
+
+    [SerializeField] GameObject ballDestroyText = null;
 
     [SerializeField] LevelLoader levelLoader = null;
 
@@ -63,7 +66,6 @@ public class BallManager : MonoBehaviour
 
     void SetBallActiveText()
     {
-        ballsActive = balls.Count;
         string text = "Active: ";
 
         if(balls.Count < 4)
@@ -84,6 +86,8 @@ public class BallManager : MonoBehaviour
 
     void Update()
     {
+        ballsActive = balls.Count;
+
         float nextBallTime = Mathf.Max(0.0f, Mathf.Min(15.0f, 15.0f - (levelLoader.time - ballStartTime)));
 
         nextBallText.text = "Next Ball: 00:" + string.Format("{0}", Mathf.Floor(nextBallTime).ToString("00"));
@@ -91,7 +95,9 @@ public class BallManager : MonoBehaviour
 
         if (balls.Count == 0)
         {
-            playBallText.SetActive(true);
+
+            playBallText.SetActive(!levelLoader.levelComplete);
+            
             Block.blocksDestroyed = 0;
             ballSpeed = baseBallSpeed;
             //reset
@@ -131,8 +137,9 @@ public class BallManager : MonoBehaviour
                 Destroy(b.gameObject);
             }
             balls.Clear();
+
         }
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision) //the ball manager's collider is below the paddles
@@ -142,7 +149,11 @@ public class BallManager : MonoBehaviour
             balls.Remove(collision.GetComponent<Ball>());
             Destroy(collision.gameObject);
 
+            levelLoader.score = Mathf.Max(0, levelLoader.score - pointsLostOnBallLost);
             //we've lost a ball
+
+            GameObject go = Instantiate(ballDestroyText, collision.transform.position, Quaternion.identity);
+            go.GetComponent<TextMeshPro>().text = "-" + pointsLostOnBallLost;
         }
     }
 }
