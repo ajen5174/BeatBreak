@@ -29,7 +29,7 @@ public class LevelSelect : MonoBehaviour
             RenderTexture renderTexture = new RenderTexture(1024, 720, 16, RenderTextureFormat.ARGB32);
             GameObject current = Instantiate(levelSelectionUI, content.transform);
             current.name = "Level" + (i + 1);
-            current.transform.position += new Vector3(i * 210.0f, 0.0f, 0.0f);
+            current.transform.position += new Vector3(i * (Camera.main.scaledPixelWidth / 6), 0.0f, 0.0f);
             GameObject currentLevelBlocks = Instantiate(levels[i], new Vector3(-30.0f, 0.0f, 0.0f), Quaternion.identity);
             levelCamera.targetTexture = renderTexture;
             levelCamera.Render();

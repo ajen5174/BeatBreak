@@ -61,7 +61,6 @@ public class Block : MonoBehaviour
             settings.startColor = c;
             TextMeshPro text = go.GetComponentInChildren<TextMeshPro>();
             text.color = c;
-            text.text = "" + scoreValue * BallManager.ballsActive * levelLoader.scoreMultiplier;
 
             if(powerUp == ePowerUp.EXTRA_BALL)
             {
@@ -76,6 +75,8 @@ public class Block : MonoBehaviour
             {
                 levelLoader.scoreMultiplier *= 3;
             }
+            text.text = "" + scoreValue * BallManager.ballsActive * levelLoader.scoreMultiplier;
+
             Destroy(this);
             Destroy(go, 1.0f);
             Destroy(gameObject, 0.01f);

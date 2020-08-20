@@ -51,7 +51,6 @@ public class LevelLoader : MonoBehaviour
         score = 0;
         scoreMultiplier = 1;
         Destroy(currentLevel);
-        nextLevelButton.SetActive(false);
 
     }
 
@@ -80,6 +79,8 @@ public class LevelLoader : MonoBehaviour
             levelIndex++;
             if (levelIndex < levels.Length)
             {
+                nextLevelButton.SetActive(false);
+
                 currentLevel = Instantiate(levels[levelIndex], transform);
 
             }

@@ -285,12 +285,12 @@ PrefabInstance:
     - target: {fileID: 6480087580965214430, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6480087580965214430, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.53749996
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6480087580965214431, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 505080342}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1644,12 +1644,12 @@ PrefabInstance:
     - target: {fileID: 6480087580965214430, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6480087580965214430, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.53749996
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6480087580965214431, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
@@ -1998,12 +1998,12 @@ PrefabInstance:
     - target: {fileID: 6480087580965214430, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6480087580965214430, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.53749996
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6480087580965214431, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
@@ -2211,12 +2211,12 @@ PrefabInstance:
     - target: {fileID: 6480087580965214430, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6480087580965214430, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.53749996
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6480087580965214431, guid: 28492c34ff0beb34b91fc29d4a6f2796,
         type: 3}
