@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class BallManager : MonoBehaviour
 {
-    public static float ballSpeed = 4;
+    public static int ballSpeed = 4;
 
     public static int ballsActive = 0;
 
@@ -16,8 +16,8 @@ public class BallManager : MonoBehaviour
     [SerializeField] GameObject ballPrefab = null;
 
     [SerializeField] int blocksDestroyedToSpeedUp = 5;
-    [SerializeField] float speedUpAmount = 1;
-    [SerializeField] float maxSpeed = 9.0f;
+    [SerializeField] int speedUpAmount = 1;
+    [SerializeField] int maxSpeed = 9;
     [SerializeField] GameObject playBallText = null;
     [SerializeField] TextMeshProUGUI nextBallText = null;
     [SerializeField] TextMeshProUGUI activeBallText = null;
@@ -58,6 +58,7 @@ public class BallManager : MonoBehaviour
         Ball ball = go.GetComponent<Ball>();
         ball.direction = RandomDirection(canFaceDown);
         balls.Add(ball);
+        ball.colorIndex = (ballSpeed - baseBallSpeed);
     }
     public void MakeBall(bool canFaceDown)
     {
@@ -123,9 +124,16 @@ public class BallManager : MonoBehaviour
         if (Block.blocksDestroyed >= blocksDestroyedToSpeedUp)
         {
             Block.blocksDestroyed -= blocksDestroyedToSpeedUp;
-            if(ballSpeed != maxSpeed)
+            if(ballSpeed < maxSpeed)
             {
+                Debug.Log("ballspeed: " + ballSpeed);
+                Debug.Log("maxspeed: " + maxSpeed);
+
                 Instantiate(speedUpText);
+                foreach(Ball b in balls)
+                {
+                    b.ChangeColor((ballSpeed - baseBallSpeed) + 1);
+                }
             }
             ballSpeed = Mathf.Min(ballSpeed + speedUpAmount, maxSpeed);
         }

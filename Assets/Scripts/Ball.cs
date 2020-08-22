@@ -10,11 +10,41 @@ public class Ball : MonoBehaviour
     [HideInInspector] public Vector2 direction = new Vector2(-0.707f, -0.707f);
 
     private Rigidbody2D body = null;
+    private SpriteRenderer sprite = null;
+    private TrailRenderer trail = null;
     private bool collidedThisFrame = false;
+
+    public int colorIndex = 0;
+    private Color[] trailColors = { Color.red, Color.yellow, Color.green, Color.cyan, Color.blue, Color.magenta, Color.white};
+
+    public void ChangeColor(int ballSpeedLevel)
+    {
+        colorIndex = ballSpeedLevel;
+        Gradient gradient = new Gradient();
+        GradientColorKey[] colorKeys = new GradientColorKey[2];
+        colorKeys[0].color = trailColors[colorIndex];
+        colorKeys[0].time = 0.0f;
+        colorKeys[1].color = Color.white; 
+        colorKeys[1].time = 1.0f;
+
+        GradientAlphaKey[] alphaKeys = new GradientAlphaKey[2];
+        alphaKeys[0].alpha = 1.0f;
+        alphaKeys[0].time = 0.0f;
+        alphaKeys[1].alpha = 0.0f;
+        alphaKeys[1].time = 1.0f;
+
+        gradient.SetKeys(colorKeys, trail.colorGradient.alphaKeys);
+        trail.colorGradient = gradient;
+
+    }
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        trail = GetComponent<TrailRenderer>();
         body.velocity = direction * BallManager.ballSpeed;
+        ChangeColor(colorIndex);
     }
 
     void FixedUpdate()
@@ -51,6 +81,14 @@ public class Ball : MonoBehaviour
         //if(collision.CompareTag("Block"))
         {
             collidedThisFrame = true;
+        }
+
+        SpriteRenderer collidedSprite = collision.GetComponent<SpriteRenderer>();
+
+        if(collidedSprite != null)
+        {
+            //sprite.color = new Color(0.5f, 0.5f, 0.5f) + collidedSprite.color;
+
         }
 
     }
