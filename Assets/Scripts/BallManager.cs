@@ -22,6 +22,9 @@ public class BallManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI nextBallText = null;
     [SerializeField] TextMeshProUGUI activeBallText = null;
     [SerializeField] GameObject speedUpText = null;
+    [SerializeField] AudioSource ballSpawnAudio = null;
+    [SerializeField] AudioSource ballDestroyAudio = null;
+
 
     [SerializeField] GameObject ballDestroyText = null;
 
@@ -59,6 +62,7 @@ public class BallManager : MonoBehaviour
         ball.direction = RandomDirection(canFaceDown);
         balls.Add(ball);
         ball.colorIndex = (ballSpeed - baseBallSpeed);
+        ballSpawnAudio.Play();
     }
     public void MakeBall(bool canFaceDown)
     {
@@ -67,7 +71,7 @@ public class BallManager : MonoBehaviour
 
     void SetBallActiveText()
     {
-        string text = "Active: ";
+        string text = "Active Balls: ";
 
         if(balls.Count < 4)
         {
@@ -91,7 +95,7 @@ public class BallManager : MonoBehaviour
 
         float nextBallTime = Mathf.Max(0.0f, Mathf.Min(15.0f, 15.0f - (levelLoader.time - ballStartTime)));
 
-        nextBallText.text = "Next Ball: 00:" + string.Format("{0}", Mathf.Floor(nextBallTime).ToString("00"));
+        nextBallText.text = "Next Ball In: 00:" + string.Format("{0}", Mathf.Floor(nextBallTime).ToString("00"));
         SetBallActiveText();
 
         if (balls.Count == 0)
@@ -162,6 +166,7 @@ public class BallManager : MonoBehaviour
 
             GameObject go = Instantiate(ballDestroyText, collision.transform.position, Quaternion.identity);
             go.GetComponent<TextMeshPro>().text = "-" + pointsLostOnBallLost;
+            ballDestroyAudio.Play();
         }
     }
 }

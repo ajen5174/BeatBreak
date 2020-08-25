@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] GameObject completeLevelTextPrefab = null;
 
     [SerializeField] GameObject nextLevelButton = null;
+    [SerializeField] AudioSource nextLevelAudio = null;
+    [SerializeField] AudioSource levelCompleteAudio = null;
 
     GameObject endScreenText = null;
 
@@ -36,6 +39,8 @@ public class LevelLoader : MonoBehaviour
     
     [HideInInspector] public int scoreMultiplier = 1;
 
+    bool audioPlayed = false;
+
     public void AddScore(int scoreToAdd)
     {
         score += BallManager.ballsActive * scoreToAdd * scoreMultiplier;
@@ -51,7 +56,8 @@ public class LevelLoader : MonoBehaviour
         score = 0;
         scoreMultiplier = 1;
         Destroy(currentLevel);
-
+        audioPlayed = false;
+        nextLevelAudio.Play();
     }
 
     void Start()
@@ -86,7 +92,7 @@ public class LevelLoader : MonoBehaviour
             }
             else
             {
-                //here we have completed the last level, so we need to go back to the title screen or something.
+                SceneManager.LoadScene("LevelSelect");
             }
             Debug.Log("Level Complete");
             levelComplete = false;
@@ -108,6 +114,13 @@ public class LevelLoader : MonoBehaviour
             levelComplete = true;
             levelStarted = false;
             nextLevelButton.SetActive(true);
+
+            //audio
+            if(!audioPlayed)
+            {
+                levelCompleteAudio.Play();
+                audioPlayed = true;
+            }
 
             if (endScreenText == null)
             {

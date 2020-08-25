@@ -6,6 +6,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     //[SerializeField] float speed = 3.0f;
+    [SerializeField] AudioSource bounceAudio = null;
 
     [HideInInspector] public Vector2 direction = new Vector2(-0.707f, -0.707f);
 
@@ -82,6 +83,8 @@ public class Ball : MonoBehaviour
         {
             collidedThisFrame = true;
         }
+
+        bounceAudio.Play();
 
         SpriteRenderer collidedSprite = collision.GetComponent<SpriteRenderer>();
 

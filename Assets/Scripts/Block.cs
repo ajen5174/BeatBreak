@@ -70,10 +70,12 @@ public class Block : MonoBehaviour
             else if (powerUp == ePowerUp.SCORE_MULTIPLIER_TWO)
             {
                 levelLoader.scoreMultiplier *= 2;
+                go.GetComponentInChildren<FloatingText>().playMultiplierAudio = true;
             }
             else if (powerUp == ePowerUp.SCORE_MULTIPLIER_THREE)
             {
                 levelLoader.scoreMultiplier *= 3;
+                go.GetComponentInChildren<FloatingText>().playMultiplierAudio = true;
             }
             text.text = "" + scoreValue * BallManager.ballsActive * levelLoader.scoreMultiplier;
 
