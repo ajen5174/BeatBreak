@@ -130,9 +130,6 @@ public class BallManager : MonoBehaviour
             Block.blocksDestroyed -= blocksDestroyedToSpeedUp;
             if(ballSpeed < maxSpeed)
             {
-                Debug.Log("ballspeed: " + ballSpeed);
-                Debug.Log("maxspeed: " + maxSpeed);
-
                 Instantiate(speedUpText);
                 foreach(Ball b in balls)
                 {
@@ -154,11 +151,11 @@ public class BallManager : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) //the ball manager's collider is below the paddles
+    private void OnCollisionEnter2D(Collision2D collision) //the ball manager's collider is below the paddles
     {
-        if (collision.CompareTag("Ball"))
+        if (collision.collider.CompareTag("Ball"))
         {
-            balls.Remove(collision.GetComponent<Ball>());
+            balls.Remove(collision.collider.GetComponent<Ball>());
             Destroy(collision.gameObject);
 
             levelLoader.score = Mathf.Max(0, levelLoader.score - pointsLostOnBallLost);

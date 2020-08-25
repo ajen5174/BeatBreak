@@ -50,9 +50,9 @@ public class Block : MonoBehaviour
         
     }
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if(collision.CompareTag("Ball"))
+		if(collision.collider.CompareTag("Ball"))
 		{
             GameObject go = Instantiate(particles, transform.position, transform.rotation);
             ParticleSystem ps = go.GetComponent<ParticleSystem>();

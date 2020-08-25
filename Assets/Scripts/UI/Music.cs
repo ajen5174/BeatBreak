@@ -8,6 +8,15 @@ public class Music : MonoBehaviour
 
     private void Start()
     {
+        if(GameObject.Find("MusicPlaying") != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        if(GameObject.Find("Music") != null)
+        {
+            name = "MusicPlaying";
+        }
         DontDestroyOnLoad(this.gameObject);
         if (backgroundMusic.isPlaying == false)
         {

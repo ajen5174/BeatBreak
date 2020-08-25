@@ -13,7 +13,6 @@ public class Ball : MonoBehaviour
     private Rigidbody2D body = null;
     private SpriteRenderer sprite = null;
     private TrailRenderer trail = null;
-    private bool collidedThisFrame = false;
 
     public int colorIndex = 0;
     private Color[] trailColors = { Color.red, Color.yellow, Color.green, Color.cyan, Color.blue, Color.magenta, Color.white};
@@ -53,51 +52,19 @@ public class Ball : MonoBehaviour
         body.velocity = body.velocity.normalized * BallManager.ballSpeed;
     }
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	private void OnCollisionEnter2D(Collision2D collision)
 	{
-        if(collidedThisFrame)
-        {
-            Debug.Log("Double collided???");
-            return;
-        }
-
-        Vector2 fromCollider = transform.position - collision.transform.position;
-
-        float angle = Vector2.Angle(Vector2.up, fromCollider);
-
-        float topRightAngle = Vector2.Angle(Vector2.up, new Vector2(collision.bounds.extents.x, collision.bounds.extents.y));
-
-        float bottomRightAngle = Vector2.Angle(Vector2.up, new Vector2(collision.bounds.extents.x, -collision.bounds.extents.y));
-
-        if(angle < topRightAngle || angle > bottomRightAngle)
-		{
-            //top or bottom hit
-            body.velocity = new Vector2(body.velocity.x, -body.velocity.y);
-		}
-        else
-		{
-            //left or right hit
-            body.velocity = new Vector2(-body.velocity.x, body.velocity.y);
-		}
-        //if(collision.CompareTag("Block"))
-        {
-            collidedThisFrame = true;
-        }
 
         bounceAudio.Play();
 
-        SpriteRenderer collidedSprite = collision.GetComponent<SpriteRenderer>();
+        //SpriteRenderer collidedSprite = collision.collider.GetComponent<SpriteRenderer>();
 
-        if(collidedSprite != null)
-        {
-            //sprite.color = new Color(0.5f, 0.5f, 0.5f) + collidedSprite.color;
+        //if(collidedSprite != null)
+        //{
+        //    sprite.color = new Color(0.5f, 0.5f, 0.5f) + collidedSprite.color;
 
-        }
+        //}
 
     }
 
-    private void LateUpdate()
-    {
-        collidedThisFrame = false;
-    }
 }

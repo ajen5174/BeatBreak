@@ -58,6 +58,7 @@ public class LevelLoader : MonoBehaviour
         Destroy(currentLevel);
         audioPlayed = false;
         nextLevelAudio.Play();
+        frameCounter = 0;
     }
 
     void Start()
@@ -94,7 +95,6 @@ public class LevelLoader : MonoBehaviour
             {
                 SceneManager.LoadScene("LevelSelect");
             }
-            Debug.Log("Level Complete");
             levelComplete = false;
         }
 
