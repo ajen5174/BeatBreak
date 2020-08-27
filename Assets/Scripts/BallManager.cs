@@ -39,7 +39,7 @@ public class BallManager : MonoBehaviour
 
     }
 
-    Vector2 RandomDirection(bool canFaceDown)
+    public static Vector2 RandomDirection(bool canFaceDown)
     {
         Vector2 direction = Vector2.up;
 

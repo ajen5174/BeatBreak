@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -29,11 +30,11 @@ public class LevelSelect : MonoBehaviour
             RenderTexture renderTexture = new RenderTexture(1024, 720, 16, RenderTextureFormat.ARGB32);
             GameObject current = Instantiate(levelSelectionUI, content.transform);
             current.name = "Level" + (i + 1);
-            current.transform.position += new Vector3(i * (Camera.main.scaledPixelWidth / 6), 0.0f, 0.0f);
+            current.GetComponentInChildren<TextMeshProUGUI>().text = "" + (i + 1);
+            //current.transform.position += new Vector3((i % 5) * (Camera.main.scaledPixelWidth / 5), -1 * (i / 5) * (Camera.main.scaledPixelHeight / 3), 0.0f);
             GameObject currentLevelBlocks = Instantiate(levels[i], new Vector3(-30.0f, 0.0f, 0.0f), Quaternion.identity);
             levelCamera.targetTexture = renderTexture;
             levelCamera.Render();
-            //Texture2D tex = renderTexture.;
             current.GetComponentInChildren<RawImage>().texture = renderTexture;
             currentLevelBlocks.SetActive(false);
             Destroy(currentLevelBlocks);

@@ -77,14 +77,18 @@ public class Block : MonoBehaviour
                 levelLoader.scoreMultiplier *= 3;
                 go.GetComponentInChildren<FloatingText>().playMultiplierAudio = true;
             }
-            text.text = "" + scoreValue * BallManager.ballsActive * levelLoader.scoreMultiplier;
+            if(levelLoader != null)
+            {
+                text.text = "" + scoreValue * BallManager.ballsActive * levelLoader.scoreMultiplier;
+                blocksDestroyed++;
+                levelLoader.blocksLeft -= 1;
+                levelLoader.AddScore(scoreValue);
+            }
 
             Destroy(this);
             Destroy(go, 1.0f);
             Destroy(gameObject, 0.01f);
-            blocksDestroyed++;
-            levelLoader.blocksLeft -= 1;
-            levelLoader.AddScore(scoreValue);
+            
 		}
 	}
 }

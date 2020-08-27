@@ -19,8 +19,12 @@ public class MenuButton : MonoBehaviour
 
     private void Start()
     {
-        m_defaultMaterial = m_text.fontMaterial;
-        m_startFontSize = m_text.fontSize;
+        if(m_text != null)
+        {
+            m_defaultMaterial = m_text.fontMaterial;
+            m_startFontSize = m_text.fontSize;
+
+        }
     }
 
     private void Update()

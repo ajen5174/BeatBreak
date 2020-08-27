@@ -7,6 +7,7 @@ public class Paddle : MonoBehaviour
     [SerializeField] float cooldown = 2.0f;
     [SerializeField] float secondsToLast = 0.5f;
     [SerializeField] SpriteRenderer effectRenderer = null;
+    [SerializeField] GameObject controlText = null;
 
     float cooldownTimer = 0.0f;
     float secondsActiveTimer = 0.0f;
@@ -33,6 +34,10 @@ public class Paddle : MonoBehaviour
         if (cooldownTimer > cooldown)
         {
             TogglePaddle(true);
+            if(controlText != null)
+            {
+                Destroy(controlText);
+            }
         }
     }
 

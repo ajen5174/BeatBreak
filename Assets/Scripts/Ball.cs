@@ -57,6 +57,14 @@ public class Ball : MonoBehaviour
 
         bounceAudio.Play();
 
+        if(body.velocity.magnitude - body.velocity.x < 0.1f || body.velocity.magnitude - body.velocity.y < 0.01f)
+        {
+            //new random direction?
+            body.velocity = BallManager.RandomDirection(true);
+            body.velocity *= BallManager.ballSpeed;
+            Debug.Log("fixed?");
+        }
+
         //SpriteRenderer collidedSprite = collision.collider.GetComponent<SpriteRenderer>();
 
         //if(collidedSprite != null)
