@@ -911,6 +911,9 @@ MonoBehaviour:
   - {fileID: 77970518419666067, guid: b76e0b92d736b6c4aa0fb5272fa45030, type: 3}
   - {fileID: 77970518419666067, guid: 6c9258f1a49bb3d44bee15da5d614060, type: 3}
   - {fileID: 77970518419666067, guid: abf469fc5aa17d74eb6f62b2ff47395e, type: 3}
+  - {fileID: 77970518419666067, guid: 85eddecc69bf8154c8648fa535770d10, type: 3}
+  - {fileID: 77970518419666067, guid: 6679608ed82945844931709aa8ba396d, type: 3}
+  - {fileID: 77970518419666067, guid: 5cef4b64de4922640977688e3cc770d1, type: 3}
   content: {fileID: 662520291}
   levelSelectionUI: {fileID: 5636268194122662388, guid: 7a3657e14f3e75443befd3710761fd6c,
     type: 3}
@@ -1411,7 +1414,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 602011266}
   m_HandleRect: {fileID: 602011265}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1673,7 +1676,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fac1addfb451f2441ba5ce884ccc36b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1b7e28a1e0dffe4a8e6024ee92049ef, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

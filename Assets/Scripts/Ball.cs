@@ -62,7 +62,6 @@ public class Ball : MonoBehaviour
             //new random direction?
             body.velocity = BallManager.RandomDirection(true);
             body.velocity *= BallManager.ballSpeed;
-            Debug.Log("fixed?");
         }
 
         //SpriteRenderer collidedSprite = collision.collider.GetComponent<SpriteRenderer>();

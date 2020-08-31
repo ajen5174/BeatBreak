@@ -41,6 +41,25 @@ public class LevelLoader : MonoBehaviour
 
     bool audioPlayed = false;
 
+    public void CreateBlock(GameObject block, Transform parent)
+    {
+        blocksLeft++;
+        Vector3 position = block.transform.position;
+        Quaternion rotation = block.transform.rotation;
+        GameObject copy = Instantiate(block, new Vector3(-1000, 0, 0), Quaternion.identity);
+        block.GetComponent<Block>().spawnAnotherBlock = false;
+        StartCoroutine(CreateBlockAfter(copy, parent, position, rotation, 0.05f));
+
+    }
+
+    IEnumerator CreateBlockAfter(GameObject block, Transform parent, Vector3 position, Quaternion rotation, float timeDelay)
+    {
+        yield return new WaitForSeconds(timeDelay);
+        block.transform.parent = parent;
+        block.transform.position = position;
+        block.transform.rotation = rotation;
+    }
+
     public void AddScore(int scoreToAdd)
     {
         score += BallManager.ballsActive * scoreToAdd * scoreMultiplier;
@@ -98,8 +117,10 @@ public class LevelLoader : MonoBehaviour
             levelComplete = false;
         }
 
-        if (blocksLeft == 0)
+        if (blocksLeft == 0 && transform.GetComponentsInChildren<Block>().Length == 0)
         {
+
+
             if (frameCounter < 5)
             {
                 frameCounter++;

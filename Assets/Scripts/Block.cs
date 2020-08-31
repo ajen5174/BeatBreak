@@ -19,6 +19,9 @@ public class Block : MonoBehaviour
     [SerializeField] ePowerUp powerUp = ePowerUp.NONE;
     [SerializeField] GameObject particles = null;
     [SerializeField] int scoreValue = 100;
+    [SerializeField] public bool spawnAnotherBlock = false;
+    [SerializeField] GameObject blockSpawned = null;
+    [SerializeField] Color blockSpawnedColor = default;
 
     [HideInInspector] public static int blocksDestroyed = 0;
 
@@ -54,7 +57,13 @@ public class Block : MonoBehaviour
 	{
 		if(collision.collider.CompareTag("Ball"))
 		{
-            GameObject go = Instantiate(particles, transform.position, transform.rotation);
+            if(levelLoader == null)
+            {
+                levelLoader = GetComponentInParent<LevelLoader>();
+            }
+
+
+            GameObject go = Instantiate(particles, transform.position, Quaternion.identity);
             ParticleSystem ps = go.GetComponent<ParticleSystem>();
             var settings = ps.main;
             Color c = GetComponent<SpriteRenderer>().color;
@@ -85,10 +94,22 @@ public class Block : MonoBehaviour
                 levelLoader.AddScore(scoreValue);
             }
 
+            if(spawnAnotherBlock)
+            {
+                LevelLoader loader = GetComponentInParent<LevelLoader>();
+                blockSpawned.GetComponent<SpriteRenderer>().color = blockSpawnedColor;
+                blockSpawned.transform.position = transform.position;
+                blockSpawned.transform.rotation = transform.rotation;
+                loader.CreateBlock(blockSpawned, transform.parent);
+            }
+            
+
             Destroy(this);
             Destroy(go, 1.0f);
             Destroy(gameObject, 0.01f);
+
             
-		}
+
+        }
 	}
 }
