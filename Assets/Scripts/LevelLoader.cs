@@ -117,11 +117,11 @@ public class LevelLoader : MonoBehaviour
             levelComplete = false;
         }
 
-        if (blocksLeft == 0 && transform.GetComponentsInChildren<Block>().Length == 0)
+        if (transform.GetComponentInChildren<Block>() == null)
         {
 
 
-            if (frameCounter < 5)
+            if (frameCounter < 30)
             {
                 frameCounter++;
                 return;
